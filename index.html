@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beach Reset Detailing Co. | Mobile Auto Detailing — South Haven, MI</title>
+  <meta name="description" content="Premium mobile auto detailing in South Haven, MI. We come to you — at home, the marina, or the beach. Book your detail today.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       CUSTOM PROPERTIES
+    ============================================================ */
+    :root {
+      --navy:    #1B2A4A;
+      --beige:   #E8D9C0;
+      --white:   #FFFFFF;
+      --lake:    #A8C8E8;
+      --seafoam: #7EC8B4;
+      --gold:    #D4956A;
+
+      --font-body:    'Lato', sans-serif;
+      --font-display: 'Playfair Display', serif;
+
+      --max-w:   1200px;
+      --pad-sec: 96px 0;
+      --radius:  12px;
+      --ease:    all 0.3s ease;
+      --shadow:  0 4px 24px rgba(27,42,74,0.10);
+      --shadow-lg: 0 10px 40px rgba(27,42,74,0.18);
+    }
+
+    /* ============================================================
+       RESET
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--navy);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.15; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ============================================================
+       UTILITIES
+    ============================================================ */
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 28px; }
+
+    .sec-header { text-align: center; margin-bottom: 60px; }
+    .sec-title {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      color: var(--navy);
+      margin-bottom: 14px;
+    }
+    .sec-sub {
+      font-size: 1.05rem;
+      color: #607090;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: var(--ease);
+      letter-spacing: 0.2px;
+    }
+    .btn-navy {
+      background: var(--navy);
+      color: var(--white);
+      border-color: var(--navy);
+    }
+    .btn-navy:hover { background: #253763; border-color: #253763; transform: translateY(-2px); box-shadow: var(--shadow); }
+
+    .btn-outline-white {
+      background: transparent;
+      color: var(--white);
+      border-color: var(--white);
+    }
+    .btn-outline-white:hover { background: var(--white); color: var(--navy); transform: translateY(-2px); }
+
+    .btn-gold {
+      background: var(--gold);
+      color: var(--white);
+      border-color: var(--gold);
+    }
+    .btn-gold:hover { background: #c4854a; border-color: #c4854a; transform: translateY(-2px); box-shadow: var(--shadow); }
+
+    .btn-outline-navy {
+      background: transparent;
+      color: var(--navy);
+      border-color: var(--navy);
+    }
+    .btn-outline-navy:hover { background: var(--navy); color: var(--white); transform: translateY(-2px); }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.in-view { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.10s; }
+    .reveal-d2 { transition-delay: 0.20s; }
+    .reveal-d3 { transition-delay: 0.30s; }
+    .reveal-d4 { transition-delay: 0.40s; }
+
+    /* ============================================================
+       NAVIGATION
+    ============================================================ */
+    #nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 1000;
+      padding: 22px 0;
+      transition: background 0.4s ease, padding 0.4s ease, box-shadow 0.4s ease;
+    }
+    #nav.solid {
+      background: var(--navy);
+      padding: 14px 0;
+      box-shadow: 0 2px 24px rgba(0,0,0,0.22);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+    }
+    .nav-logo small {
+      display: block;
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      opacity: 0.65;
+      margin-top: 2px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.88);
+      font-weight: 600;
+      font-size: 0.93rem;
+      letter-spacing: 0.3px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links .btn { padding: 10px 22px; font-size: 0.9rem; }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 26px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: var(--ease);
+    }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    /* Mobile overlay menu */
+    .mobile-nav {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: var(--navy);
+      display: flex;
+      flex-direction: column;
+      padding: 96px 32px 48px;
+      gap: 4px;
+      visibility: hidden;
+      opacity: 0;
+      transform: translateX(100%);
+      transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s;
+    }
+    .mobile-nav.open {
+      visibility: visible;
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .mobile-nav a {
+      color: var(--white);
+      font-family: var(--font-display);
+      font-size: 1.9rem;
+      font-weight: 700;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .mobile-nav .btn {
+      align-self: flex-start;
+      margin-top: 20px;
+      font-family: var(--font-body);
+      font-size: 1rem;
+    }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    #hero {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background: url('hero.png') center center / cover no-repeat;
+    }
+    /* Dark overlay so white text stays legible */
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(13, 26, 48, 0.78) 0%,
+        rgba(27, 42, 74, 0.55) 60%,
+        rgba(27, 42, 74, 0.30) 100%
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+    #hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+    }
+    .hero-wave { z-index: 2; }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--seafoam);
+      margin-bottom: 20px;
+    }
+    .hero-title {
+      font-size: clamp(3rem, 6.5vw, 5.2rem);
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 22px;
+      line-height: 1.08;
+    }
+    .hero-title em { font-style: italic; color: var(--lake); }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: rgba(232,217,192,0.88);
+      max-width: 500px;
+      margin-bottom: 40px;
+      line-height: 1.65;
+    }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    /* Wave at base of hero */
+    .hero-wave {
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      line-height: 0;
+      pointer-events: none;
+    }
+    .hero-wave svg { display: block; width: 100%; }
+
+    /* ============================================================
+       WHY SECTION
+    ============================================================ */
+    #why { padding: var(--pad-sec); background: var(--beige); }
+
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+
+    .feat-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 40px 32px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: var(--ease);
+    }
+    .feat-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+
+    .feat-icon {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--lake), var(--seafoam));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 22px;
+      font-size: 1.8rem;
+    }
+    .feat-card h3 { font-size: 1.3rem; margin-bottom: 10px; color: var(--navy); }
+    .feat-card p { font-size: 0.96rem; color: #607090; line-height: 1.65; }
+
+    /* ============================================================
+       PACKAGES
+    ============================================================ */
+    #packages { padding: var(--pad-sec); background: var(--white); }
+
+    .pkg-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 26px;
+    }
+
+    .pkg-card {
+      border: 2px solid #e4eaf3;
+      border-radius: var(--radius);
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      transition: var(--ease);
+      position: relative;
+      overflow: hidden;
+      background: var(--white);
+    }
+    .pkg-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--lake); }
+
+    /* Featured card */
+    .pkg-card.featured {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: var(--white);
+    }
+    .pkg-card.featured:hover { border-color: #2a4070; }
+    .pkg-card.featured h3 { color: var(--white); }
+    .pkg-card.featured .pkg-price { color: var(--white); }
+    .pkg-card.featured .pkg-note { color: rgba(232,217,192,0.65); }
+    .pkg-card.featured .pkg-desc { color: rgba(255,255,255,0.78); }
+    .pkg-card.featured .pkg-time { color: var(--seafoam); }
+    .pkg-card.featured .pkg-divider { background: rgba(255,255,255,0.14); }
+    .pkg-card.featured .pkg-includes li { color: rgba(255,255,255,0.82); }
+    .pkg-card.featured .pkg-includes li::before { color: var(--seafoam); }
+    .pkg-card.featured .btn-outline-navy {
+      color: var(--white);
+      border-color: rgba(255,255,255,0.6);
+    }
+    .pkg-card.featured .btn-outline-navy:hover {
+      background: var(--white);
+      color: var(--navy);
+      border-color: var(--white);
+    }
+
+    .pkg-badge {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      background: var(--gold);
+      color: var(--white);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 50px;
+    }
+    .pkg-card h3 {
+      font-size: 1.45rem;
+      color: var(--navy);
+      margin-bottom: 8px;
+      padding-right: 90px; /* avoid badge overlap */
+    }
+    .pkg-price {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .pkg-note {
+      font-size: 0.8rem;
+      font-style: italic;
+      color: #8090a8;
+      margin-bottom: 14px;
+    }
+    .pkg-desc { font-size: 0.93rem; color: #607090; line-height: 1.6; margin-bottom: 12px; }
+    .pkg-time {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--seafoam);
+      letter-spacing: 0.4px;
+      margin-bottom: 18px;
+    }
+    .pkg-divider { height: 1px; background: #e4eaf3; margin-bottom: 18px; }
+    .pkg-includes { flex: 1; margin-bottom: 28px; }
+    .pkg-includes li {
+      font-size: 0.89rem;
+      color: #607090;
+      padding: 5px 0 5px 22px;
+      position: relative;
+      line-height: 1.5;
+    }
+    .pkg-includes li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--seafoam);
+      font-weight: 700;
+    }
+    .pkg-cta { width: 100%; text-align: center; }
+
+    /* ============================================================
+       GALLERY
+    ============================================================ */
+    #gallery { padding: var(--pad-sec); background: var(--beige); }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+    .gallery-item {
+      border-radius: 10px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      position: relative;
+      cursor: pointer;
+    }
+    .gallery-ph {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #b8cada, #cddbe8);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.4s ease;
+    }
+    .gallery-ph-icon { font-size: 2rem; opacity: 0.45; }
+    .gallery-ph-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--navy);
+      opacity: 0.55;
+      letter-spacing: 0.5px;
+    }
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(27,42,74,0.75) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: flex;
+      align-items: flex-end;
+      padding: 18px 20px;
+    }
+    .gallery-overlay span {
+      color: var(--white);
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-item:hover .gallery-ph { transform: scale(1.05); }
+    .gallery-note { text-align: center; font-size: 0.93rem; color: #8090a8; font-style: italic; }
+
+    /* ============================================================
+       BOOKING
+    ============================================================ */
+    #book { padding: var(--pad-sec); background: var(--white); }
+
+    .book-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.75fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .book-info .sec-title { text-align: left; }
+    .book-info > p {
+      color: #607090;
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+    .book-details { display: flex; flex-direction: column; gap: 22px; }
+    .book-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .book-detail-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--beige);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .book-detail-text strong { display: block; font-size: 0.88rem; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+    .book-detail-text span  { font-size: 0.86rem; color: #8090a8; }
+
+    /* Form */
+    .form-card {
+      background: var(--white);
+      border: 1px solid #e4eaf3;
+      border-radius: var(--radius);
+      padding: 44px 40px;
+      box-shadow: var(--shadow);
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .form-group { margin-bottom: 20px; }
+    label {
+      display: block;
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 7px;
+      letter-spacing: 0.3px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 13px 16px;
+      border: 2px solid #dde5f0;
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--navy);
+      background: var(--white);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231B2A4A' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 44px;
+      cursor: pointer;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--lake);
+      box-shadow: 0 0 0 4px rgba(168,200,232,0.22);
+    }
+    input::placeholder, textarea::placeholder { color: #a8b4c4; }
+    textarea { resize: vertical; min-height: 110px; }
+    .form-submit { width: 100%; padding: 16px; font-size: 1.05rem; }
+
+    .input-error { border-color: #d85c5c !important; }
+
+    /* Success state */
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .form-success.show { display: block; }
+    .success-icon { font-size: 3.5rem; margin-bottom: 20px; }
+    .form-success h3 { font-size: 1.75rem; color: var(--navy); margin-bottom: 12px; }
+    .form-success p { color: #607090; font-size: 1rem; }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.78);
+      padding: 64px 0 32px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand .nav-logo { font-size: 1.35rem; color: var(--white); margin-bottom: 10px; }
+    .footer-tagline { font-size: 0.93rem; color: rgba(232,217,192,0.65); font-style: italic; margin-bottom: 24px; }
+    .footer-social { display: flex; gap: 12px; }
+    .social-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      transition: var(--ease);
+    }
+    .social-btn:hover { background: var(--seafoam); color: var(--navy); transform: translateY(-3px); }
+    .footer-col h4 {
+      font-family: var(--font-body);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--seafoam);
+      margin-bottom: 20px;
+    }
+    .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul a { font-size: 0.93rem; color: rgba(255,255,255,0.72); transition: color 0.2s; }
+    .footer-col ul a:hover { color: var(--white); }
+    .footer-col p { font-size: 0.93rem; margin-bottom: 6px; color: rgba(255,255,255,0.72); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .footer-bottom p { font-size: 0.83rem; color: rgba(255,255,255,0.45); }
+
+    /* ============================================================
+       FLOATING BOOK BUTTON (mobile only)
+    ============================================================ */
+    .float-btn {
+      display: none;
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      z-index: 998;
+      background: var(--gold);
+      color: var(--white);
+      border: none;
+      border-radius: 50px;
+      padding: 14px 24px;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 6px 24px rgba(212,149,106,0.52);
+      transition: var(--ease);
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    .float-btn.show { opacity: 1; transform: translateY(0); }
+    .float-btn:hover { background: #c4854a; transform: translateY(-3px); }
+
+    /* ============================================================
+       RESPONSIVE — TABLET ≤ 900px
+    ============================================================ */
+    @media (max-width: 900px) {
+      :root { --pad-sec: 72px 0; }
+
+      .features { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+      .pkg-grid  { grid-template-columns: 1fr; max-width: 540px; margin: 0 auto; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .book-grid { grid-template-columns: 1fr; gap: 40px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+
+    /* ============================================================
+       RESPONSIVE — MOBILE ≤ 600px
+    ============================================================ */
+    @media (max-width: 600px) {
+      :root { --pad-sec: 60px 0; }
+
+      /* Nav */
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .float-btn { display: block; }
+
+      /* Hero */
+      .hero-title { font-size: 2.5rem; }
+      .hero-btns { flex-direction: column; align-items: flex-start; }
+
+      /* Gallery */
+      .gallery-grid { grid-template-columns: 1fr; }
+
+      /* Form */
+      .form-card { padding: 28px 18px; }
+      .form-row { grid-template-columns: 1fr; }
+
+      /* Footer */
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+
+      /* Section headers */
+      .sec-header { margin-bottom: 40px; }
+      .book-info .sec-title { text-align: center; }
+      .book-info > p { text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION
+  ============================================================ -->
+  <nav id="nav">
+    <div class="container nav-inner">
+      <a href="#hero" class="nav-logo">
+        Beach Reset Detailing Co.
+        <small>South Haven, MI</small>
+      </a>
+      <div class="nav-links">
+        <a href="#why">Services</a>
+        <a href="#packages">Packages &amp; Pricing</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#book" class="btn btn-gold">Book Now</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile nav overlay -->
+  <div class="mobile-nav" id="mobileNav" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <a href="#why"      class="mob-link">Services</a>
+    <a href="#packages" class="mob-link">Packages &amp; Pricing</a>
+    <a href="#gallery"  class="mob-link">Gallery</a>
+    <a href="#book"     class="btn btn-gold mob-link">Book Now</a>
+  </div>
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-content">
+        <span class="hero-eyebrow">Mobile Auto Detailing — South Haven, MI</span>
+        <h1 class="hero-title">Your Vehicle,<br><em>Freshly Reset.</em></h1>
+        <p class="hero-sub">Premium mobile detailing in South Haven, MI. We come to you — at home, the marina, or the beach.</p>
+        <div class="hero-btns">
+          <a href="#packages" class="btn btn-gold">See Our Packages</a>
+          <a href="#book"     class="btn btn-outline-white">Book Now</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-wave">
+      <svg viewBox="0 0 1440 72" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,36 C360,72 720,0 1080,36 C1260,54 1380,24 1440,36 L1440,72 L0,72 Z" fill="#E8D9C0"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       WHY CHOOSE US
+  ============================================================ -->
+  <section id="why">
+    <div class="container">
+      <div class="sec-header">
+        <h2 class="sec-title reveal">Why Beach Reset?</h2>
+        <p class="sec-sub reveal reveal-d1">We built this service for lake life — because your vehicle deserves the same care as your weekend.</p>
+      </div>
+      <div class="features">
+        <div class="feat-card reveal reveal-d1">
+          <div class="feat-icon">📍</div>
+          <h3>We Come to You</h3>
+          <p>No drop-off, no waiting. We detail your vehicle wherever it's parked — your driveway, the marina, or right at the beach.</p>
+        </div>
+        <div class="feat-card reveal reveal-d2">
+          <div class="feat-icon">🌊</div>
+          <h3>Beach-Ready Clean</h3>
+          <p>We know lake life. Sand, sunscreen, salt air — we handle it all and leave your vehicle spotless inside and out.</p>
+        </div>
+        <div class="feat-card reveal reveal-d3">
+          <div class="feat-icon">✨</div>
+          <h3>Done Right, Every Time</h3>
+          <p>Every detail is thorough, top-to-bottom, inside and out. We don't cut corners — your vehicle gets our full attention.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PACKAGES
+  ============================================================ -->
+  <section id="packages">
+    <div class="container">
+      <div class="sec-header">
+        <h2 class="sec-title reveal">Our Packages</h2>
+        <p class="sec-sub reveal reveal-d1">Straightforward pricing, no surprises. Every package is performed on-site, wherever you're parked.</p>
+      </div>
+      <div class="pkg-grid">
+
+        <!-- Golf Cart Detail -->
+        <div class="pkg-card reveal reveal-d1">
+          <h3>The Golf Cart Detail</h3>
+          <div class="pkg-price">$95</div>
+          <p class="pkg-note">+20% for extended/second-row carts</p>
+          <p class="pkg-desc">Give your golf cart a full refresh with our premium detailing package.</p>
+          <div class="pkg-time">⏱ 1–1.5 hours</div>
+          <div class="pkg-divider"></div>
+          <ul class="pkg-includes">
+            <li>Full interior &amp; exterior hand wash</li>
+            <li>Brushing of hard-to-reach areas</li>
+            <li>Wheel &amp; tire cleaning</li>
+            <li>Seat wipe-down &amp; conditioning</li>
+            <li>Dash &amp; trim cleaning</li>
+            <li>Window cleaning</li>
+            <li>Final shine treatment</li>
+          </ul>
+          <a href="#book" class="btn btn-outline-navy pkg-cta">Book This Package</a>
+        </div>
+
+        <!-- Interior Refresh -->
+        <div class="pkg-card reveal reveal-d2">
+          <h3>The Interior Refresh</h3>
+          <div class="pkg-price">$150</div>
+          <p class="pkg-note">+20% for third-row vehicles</p>
+          <p class="pkg-desc">Bring your vehicle's interior back to life with a deep, comprehensive clean.</p>
+          <div class="pkg-time">⏱ 2–3 hours</div>
+          <div class="pkg-divider"></div>
+          <ul class="pkg-includes">
+            <li>Full interior vacuum</li>
+            <li>Wipe-down of all surfaces</li>
+            <li>Deep cleaning of cupholders &amp; vents</li>
+            <li>Door panels, dashboard &amp; center console</li>
+            <li>Interior window cleaning</li>
+            <li>Floor mat cleaning</li>
+            <li>Leather/vinyl/plastic conditioning</li>
+          </ul>
+          <a href="#book" class="btn btn-outline-navy pkg-cta">Book This Package</a>
+        </div>
+
+        <!-- Complete Detail — Featured -->
+        <div class="pkg-card featured reveal reveal-d3">
+          <span class="pkg-badge">⭐ Most Popular</span>
+          <h3>The Complete Detail</h3>
+          <div class="pkg-price">$265</div>
+          <p class="pkg-note">+20% for third-row vehicles</p>
+          <p class="pkg-desc">Our signature full-service detail — restore your vehicle inside and out.</p>
+          <div class="pkg-time">⏱ 3–5 hours</div>
+          <div class="pkg-divider"></div>
+          <ul class="pkg-includes">
+            <li>Everything in the Interior Refresh</li>
+            <li>Full exterior hand wash</li>
+            <li>Wheel &amp; tire cleaning</li>
+            <li>Brushing of cracks &amp; crevices</li>
+            <li>Bug &amp; grime removal</li>
+            <li>Exterior window cleaning</li>
+            <li>Tire shine</li>
+            <li>Protective spray wax finish</li>
+          </ul>
+          <a href="#book" class="btn btn-outline-navy pkg-cta">Book This Package</a>
+        </div>
+
+        <!-- Monthly Maintenance -->
+        <div class="pkg-card reveal reveal-d4">
+          <h3>Monthly Maintenance</h3>
+          <div class="pkg-price" style="font-size:1.55rem; padding-top:5px;">Contact for Pricing</div>
+          <p class="pkg-note">Available exclusively for prior Complete Detail customers</p>
+          <p class="pkg-desc">Keep your vehicle consistently clean and protected all season long.</p>
+          <div class="pkg-time">⏱ 3–5 hours</div>
+          <div class="pkg-divider"></div>
+          <ul class="pkg-includes">
+            <li>Full interior touch-up &amp; vacuum</li>
+            <li>Surface wipe-down</li>
+            <li>Exterior hand wash</li>
+            <li>Wheel &amp; tire cleaning</li>
+            <li>Window cleaning</li>
+            <li>Maintenance protection application</li>
+          </ul>
+          <a href="#book" class="btn btn-outline-navy pkg-cta">Get in Touch</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       GALLERY
+  ============================================================ -->
+  <section id="gallery">
+    <div class="container">
+      <div class="sec-header">
+        <h2 class="sec-title reveal">The Results Speak for Themselves</h2>
+        <p class="sec-sub reveal reveal-d1">Every vehicle leaves our hands looking — and feeling — brand new.</p>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item reveal reveal-d1">
+          <div class="gallery-ph">
+            <div class="gallery-ph-icon">🚗</div>
+            <div class="gallery-ph-label">Before / After 1</div>
+          </div>
+          <div class="gallery-overlay"><span>Complete Detail</span></div>
+        </div>
+        <div class="gallery-item reveal reveal-d2">
+          <div class="gallery-ph">
+            <div class="gallery-ph-icon">✨</div>
+            <div class="gallery-ph-label">Before / After 2</div>
+          </div>
+          <div class="gallery-overlay"><span>Interior Refresh</span></div>
+        </div>
+        <div class="gallery-item reveal reveal-d3">
+          <div class="gallery-ph">
+            <div class="gallery-ph-icon">🌊</div>
+            <div class="gallery-ph-label">Before / After 3</div>
+          </div>
+          <div class="gallery-overlay"><span>Golf Cart Detail</span></div>
+        </div>
+        <div class="gallery-item reveal reveal-d1">
+          <div class="gallery-ph">
+            <div class="gallery-ph-icon">🚐</div>
+            <div class="gallery-ph-label">Before / After 4</div>
+          </div>
+          <div class="gallery-overlay"><span>SUV Complete Detail</span></div>
+        </div>
+        <div class="gallery-item reveal reveal-d2">
+          <div class="gallery-ph">
+            <div class="gallery-ph-icon">💎</div>
+            <div class="gallery-ph-label">Before / After 5</div>
+          </div>
+          <div class="gallery-overlay"><span>Luxury Interior</span></div>
+        </div>
+        <div class="gallery-item reveal reveal-d3">
+          <div class="gallery-ph">
+            <div class="gallery-ph-icon">🏖️</div>
+            <div class="gallery-ph-label">Before / After 6</div>
+          </div>
+          <div class="gallery-overlay"><span>Beach Vehicle</span></div>
+        </div>
+      </div>
+      <p class="gallery-note reveal">Real photos coming soon — check back after our first details!</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       BOOKING
+  ============================================================ -->
+  <section id="book">
+    <div class="container">
+      <div class="book-grid">
+
+        <!-- Left: info -->
+        <div class="book-info reveal">
+          <h2 class="sec-title">Book Your Detail</h2>
+          <p>Ready for a reset? Fill out the form below and we'll get back to you within 24 hours to confirm your appointment.</p>
+          <div class="book-details">
+            <div class="book-detail">
+              <div class="book-detail-icon">📍</div>
+              <div class="book-detail-text">
+                <strong>Service Area</strong>
+                <span>South Haven, MI and surrounding areas</span>
+              </div>
+            </div>
+            <div class="book-detail">
+              <div class="book-detail-icon">🚗</div>
+              <div class="book-detail-text">
+                <strong>We Come to You</strong>
+                <span>Your driveway, marina, or wherever you're parked</span>
+              </div>
+            </div>
+            <div class="book-detail">
+              <div class="book-detail-icon">⏰</div>
+              <div class="book-detail-text">
+                <strong>24-Hour Response</strong>
+                <span>We reply to every request within 24 hours</span>
+              </div>
+            </div>
+            <div class="book-detail">
+              <div class="book-detail-icon">🌤️</div>
+              <div class="book-detail-text">
+                <strong>Seasonal Service</strong>
+                <span>Operating through the South Haven summer season</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: form -->
+        <div class="reveal reveal-d2">
+          <form class="form-card" id="bookForm" novalidate>
+
+            <!-- Success message (hidden until submit) -->
+            <div class="form-success" id="formSuccess">
+              <div class="success-icon">🎉</div>
+              <h3>You're all set!</h3>
+              <p>Thanks! We'll be in touch within 24 hours to confirm your appointment.</p>
+            </div>
+
+            <!-- Form fields -->
+            <div id="formFields">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="name">Full Name</label>
+                  <input type="text" id="name" name="name" placeholder="Your full name" required>
+                </div>
+                <div class="form-group">
+                  <label for="phone">Phone Number</label>
+                  <input type="tel" id="phone" name="phone" placeholder="(269) 555-0100" required>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="email">Email Address</label>
+                  <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                </div>
+                <div class="form-group">
+                  <label for="pkg">Package</label>
+                  <select id="pkg" name="pkg" required>
+                    <option value="" disabled selected>Select a package</option>
+                    <option value="golf-cart">Golf Cart Detail — $95</option>
+                    <option value="interior">Interior Refresh — $150</option>
+                    <option value="complete">Complete Detail — $265</option>
+                    <option value="maintenance">Monthly Maintenance</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="address">Service Address</label>
+                <input type="text" id="address" name="address" placeholder="Where should we meet you?" required>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="vehicle">Vehicle Make &amp; Model</label>
+                  <input type="text" id="vehicle" name="vehicle" placeholder="e.g. 2021 Toyota Highlander" required>
+                </div>
+                <div class="form-group">
+                  <label for="date">Preferred Date</label>
+                  <input type="date" id="date" name="date" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="notes">Additional Notes</label>
+                <textarea id="notes" name="notes" placeholder="Pet hair, heavy soiling, special requests — let us know anything helpful."></textarea>
+              </div>
+              <button type="submit" class="btn btn-navy form-submit">Send My Request</button>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+
+        <div class="footer-brand">
+          <div class="nav-logo">Beach Reset Detailing Co.</div>
+          <p class="footer-tagline">Mobile detailing for lake life.</p>
+          <div class="footer-social">
+            <!-- Instagram -->
+            <a href="#" class="social-btn" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+              </svg>
+            </a>
+            <!-- Facebook -->
+            <a href="#" class="social-btn" aria-label="Facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="#why">Services</a></li>
+            <li><a href="#packages">Packages</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#book">Book Now</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Location</h4>
+          <p>South Haven, MI</p>
+          <p>Mobile service —<br>we come to you.</p>
+        </div>
+
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Beach Reset Detailing Co. All rights reserved.</p>
+        <p>South Haven, MI</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Book Now (mobile, appears after hero) -->
+  <button class="float-btn" id="floatBtn" onclick="location.href='#book'">
+    Book Now ↗
+  </button>
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    /* ----------------------------------------------------------
+       NAV: transparent → solid on scroll past hero
+    ---------------------------------------------------------- */
+    const nav      = document.getElementById('nav');
+    const hero     = document.getElementById('hero');
+    const floatBtn = document.getElementById('floatBtn');
+
+    new IntersectionObserver(([e]) => {
+      const past = !e.isIntersecting;
+      nav.classList.toggle('solid', past);
+      floatBtn.classList.toggle('show', past);
+    }, { threshold: 0.08 }).observe(hero);
+
+    /* ----------------------------------------------------------
+       HAMBURGER MENU
+    ---------------------------------------------------------- */
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+
+    hamburger.addEventListener('click', () => {
+      const open = mobileNav.classList.toggle('open');
+      hamburger.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+
+    document.querySelectorAll('.mob-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileNav.classList.remove('open');
+        hamburger.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    /* ----------------------------------------------------------
+       SCROLL REVEAL (IntersectionObserver)
+    ---------------------------------------------------------- */
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          revealObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    /* ----------------------------------------------------------
+       FORM SUBMISSION
+    ---------------------------------------------------------- */
+    const bookForm    = document.getElementById('bookForm');
+    const formSuccess = document.getElementById('formSuccess');
+    const formFields  = document.getElementById('formFields');
+
+    /* Set minimum date to today */
+    document.getElementById('date').min = new Date().toISOString().split('T')[0];
+
+    bookForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      /* Validate required fields */
+      let firstInvalid = null;
+      bookForm.querySelectorAll('[required]').forEach(field => {
+        field.classList.remove('input-error');
+        if (!field.value.trim()) {
+          field.classList.add('input-error');
+          if (!firstInvalid) firstInvalid = field;
+        }
+      });
+
+      if (firstInvalid) {
+        firstInvalid.focus();
+        return;
+      }
+
+      /* Show success */
+      formFields.style.display  = 'none';
+      formSuccess.classList.add('show');
+      formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+
+    /* Clear error state on input */
+    bookForm.querySelectorAll('input, select, textarea').forEach(f => {
+      f.addEventListener('input', () => f.classList.remove('input-error'));
+    });
+  </script>
+
+</body>
+</html>

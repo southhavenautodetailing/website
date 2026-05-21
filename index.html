@@ -1154,9 +1154,8 @@
             <p id="reviewSuccessMsg">We really appreciate it.</p>
           </div>
 
-          <form id="reviewForm" name="customer-review" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+          <form id="reviewForm" name="customer-review" method="POST" data-netlify="true" novalidate>
             <input type="hidden" name="form-name" value="customer-review">
-            <input type="hidden" name="bot-field" style="display:none">
             <div class="form-group">
               <label>Your Rating</label>
               <div class="star-picker" id="starPicker" role="group" aria-label="Star rating">
@@ -1421,14 +1420,16 @@
       if (!valid) return;
 
       try {
-        const body = new URLSearchParams({
-          'form-name': 'customer-review',
-          name:    nameEl.value.trim(),
-          message: messageEl.value.trim(),
-          rating:  selectedRating,
-        });
+        const formData = new FormData();
+        formData.append('form-name', 'customer-review');
+        formData.append('name',    nameEl.value.trim());
+        formData.append('message', messageEl.value.trim());
+        formData.append('rating',  selectedRating);
 
-        const res = await fetch('/', { method: 'POST', body });
+        const res = await fetch('/', {
+          method: 'POST',
+          body:   new URLSearchParams(formData),
+        });
         if (!res.ok) throw new Error('Server error');
 
         const successMsg = document.getElementById('reviewSuccessMsg');

@@ -1165,15 +1165,16 @@
                 <span class="star-picker-star" data-val="4">★</span>
                 <span class="star-picker-star" data-val="5">★</span>
               </div>
+              <input type="hidden" name="rating" id="ratingInput">
               <div class="star-error" id="starError">Please select a star rating.</div>
             </div>
             <div class="form-group">
               <label for="reviewName">Your Name</label>
-              <input type="text" id="reviewName" placeholder="e.g. Sarah M." required>
+              <input type="text" id="reviewName" name="name" placeholder="e.g. Sarah M." required>
             </div>
             <div class="form-group">
               <label for="reviewMessage">Your Review</label>
-              <textarea id="reviewMessage" placeholder="Tell us about your experience..." rows="4" required></textarea>
+              <textarea id="reviewMessage" name="message" placeholder="Tell us about your experience..." rows="4" required></textarea>
             </div>
             <button type="submit" class="btn btn-navy form-submit">Submit Review</button>
           </form>
@@ -1395,6 +1396,7 @@
       });
       star.addEventListener('click', () => {
         selectedRating = +star.dataset.val;
+        document.getElementById('ratingInput').value = selectedRating;
         paintStars(selectedRating);
         starError.classList.remove('show');
       });
@@ -1420,15 +1422,9 @@
       if (!valid) return;
 
       try {
-        const formData = new FormData();
-        formData.append('form-name', 'customer-review');
-        formData.append('name',    nameEl.value.trim());
-        formData.append('message', messageEl.value.trim());
-        formData.append('rating',  selectedRating);
-
         const res = await fetch('/', {
           method: 'POST',
-          body:   new URLSearchParams(formData),
+          body:   new URLSearchParams(new FormData(document.getElementById('reviewForm'))),
         });
         if (!res.ok) throw new Error('Server error');
 

@@ -303,6 +303,57 @@
     .hero-wave svg { display: block; width: 100%; }
 
     /* ============================================================
+       REVIEWS MARQUEE
+    ============================================================ */
+    #reviews {
+      background: var(--navy);
+      padding: 22px 0;
+      overflow: hidden;
+      position: relative;
+    }
+    /* Fade edges */
+    #reviews::before,
+    #reviews::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 120px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    #reviews::before { left: 0;  background: linear-gradient(to right, var(--navy), transparent); }
+    #reviews::after  { right: 0; background: linear-gradient(to left,  var(--navy), transparent); }
+
+    .marquee-track {
+      display: flex;
+      gap: 0;
+      /* width is set by JS once items are known */
+    }
+    .marquee-track.running {
+      animation: marquee-scroll linear infinite;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+
+    @keyframes marquee-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(var(--marquee-end)); }
+    }
+
+    .review-chip {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 0 40px;
+      white-space: nowrap;
+      border-right: 1px solid rgba(255,255,255,0.1);
+      flex-shrink: 0;
+    }
+    .review-stars { color: var(--gold); font-size: 0.95rem; letter-spacing: 1px; }
+    .review-text  { color: rgba(255,255,255,0.85); font-size: 0.9rem; font-style: italic; }
+    .review-name  { color: var(--seafoam); font-size: 0.85rem; font-weight: 700; white-space: nowrap; }
+
+    /* ============================================================
        WHY SECTION
     ============================================================ */
     #why { padding: var(--pad-sec); background: var(--beige); }
@@ -451,55 +502,32 @@
 
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      margin-bottom: 28px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
     }
     .gallery-item {
-      border-radius: 10px;
+      border-radius: 8px;
       overflow: hidden;
       aspect-ratio: 4/3;
       position: relative;
       cursor: pointer;
+      background: #b8cada;
     }
-    .gallery-ph {
+    .gallery-item img {
       width: 100%;
       height: 100%;
-      background: linear-gradient(135deg, #b8cada, #cddbe8);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
+      object-fit: cover;
+      display: block;
       transition: transform 0.4s ease;
     }
-    .gallery-ph-icon { font-size: 2rem; opacity: 0.45; }
-    .gallery-ph-label {
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--navy);
-      opacity: 0.55;
-      letter-spacing: 0.5px;
+    .gallery-item:hover img { transform: scale(1.05); }
+
+    @media (max-width: 900px) {
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
     }
-    .gallery-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(27,42,74,0.75) 0%, transparent 55%);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      display: flex;
-      align-items: flex-end;
-      padding: 18px 20px;
+    @media (max-width: 500px) {
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
     }
-    .gallery-overlay span {
-      color: var(--white);
-      font-size: 0.88rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
-    .gallery-item:hover .gallery-overlay { opacity: 1; }
-    .gallery-item:hover .gallery-ph { transform: scale(1.05); }
-    .gallery-note { text-align: center; font-size: 0.93rem; color: #8090a8; font-style: italic; }
 
     /* ============================================================
        BOOKING
@@ -599,6 +627,53 @@
     .success-icon { font-size: 3.5rem; margin-bottom: 20px; }
     .form-success h3 { font-size: 1.75rem; color: var(--navy); margin-bottom: 12px; }
     .form-success p { color: #607090; font-size: 1rem; }
+
+    /* ============================================================
+       LEAVE A REVIEW SECTION
+    ============================================================ */
+    #leave-review { padding: var(--pad-sec); background: var(--beige); }
+
+    .review-form-wrap {
+      max-width: 620px;
+      margin: 0 auto;
+    }
+    .review-form-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 44px 40px;
+      box-shadow: var(--shadow);
+      border: 1px solid #e4eaf3;
+    }
+
+    /* Star picker */
+    .star-picker { display: flex; gap: 8px; margin-bottom: 4px; }
+    .star-picker-star {
+      font-size: 2.2rem;
+      cursor: pointer;
+      color: #d0d8e4;
+      transition: color 0.15s ease, transform 0.15s ease;
+      line-height: 1;
+      user-select: none;
+    }
+    .star-picker-star.active  { color: var(--gold); }
+    .star-picker-star.hovered { color: var(--gold); transform: scale(1.15); }
+    .star-error { font-size: 0.82rem; color: #d85c5c; margin-top: 4px; display: none; }
+    .star-error.show { display: block; }
+
+    /* Review success */
+    .review-success {
+      display: none;
+      text-align: center;
+      padding: 32px 20px;
+    }
+    .review-success.show { display: block; }
+    .review-success-icon { font-size: 3rem; margin-bottom: 16px; }
+    .review-success h3 { font-size: 1.6rem; color: var(--navy); margin-bottom: 10px; }
+    .review-success p  { color: #607090; font-size: 0.97rem; }
+
+    @media (max-width: 600px) {
+      .review-form-card { padding: 28px 18px; }
+    }
 
     /* ============================================================
        FOOTER
@@ -780,6 +855,15 @@
   </section>
 
   <!-- ============================================================
+       REVIEWS MARQUEE
+  ============================================================ -->
+  <section id="reviews" aria-label="Customer reviews">
+    <div class="marquee-track" id="marqueeTrack">
+      <!-- Chips injected by JS from reviews.json via /api/reviews -->
+    </div>
+  </section>
+
+  <!-- ============================================================
        WHY CHOOSE US
   ============================================================ -->
   <section id="why">
@@ -910,54 +994,34 @@
   <section id="gallery">
     <div class="container">
       <div class="sec-header">
-        <h2 class="sec-title reveal">The Results Speak for Themselves</h2>
-        <p class="sec-sub reveal reveal-d1">Every vehicle leaves our hands looking — and feeling — brand new.</p>
+        <h2 class="sec-title reveal">Our Work</h2>
       </div>
       <div class="gallery-grid">
         <div class="gallery-item reveal reveal-d1">
-          <div class="gallery-ph">
-            <div class="gallery-ph-icon">🚗</div>
-            <div class="gallery-ph-label">Before / After 1</div>
-          </div>
-          <div class="gallery-overlay"><span>Complete Detail</span></div>
+          <img src="photos/Full_car.jpg" alt="Full car detail" loading="lazy">
         </div>
         <div class="gallery-item reveal reveal-d2">
-          <div class="gallery-ph">
-            <div class="gallery-ph-icon">✨</div>
-            <div class="gallery-ph-label">Before / After 2</div>
-          </div>
-          <div class="gallery-overlay"><span>Interior Refresh</span></div>
+          <img src="photos/Seats_back_facing.jpg" alt="Back seats detail" loading="lazy">
         </div>
         <div class="gallery-item reveal reveal-d3">
-          <div class="gallery-ph">
-            <div class="gallery-ph-icon">🌊</div>
-            <div class="gallery-ph-label">Before / After 3</div>
-          </div>
-          <div class="gallery-overlay"><span>Golf Cart Detail</span></div>
+          <img src="photos/Passenger_Work.jpg" alt="Passenger side work" loading="lazy">
+        </div>
+        <div class="gallery-item reveal reveal-d4">
+          <img src="photos/Driver_Low.jpg" alt="Driver side low angle" loading="lazy">
         </div>
         <div class="gallery-item reveal reveal-d1">
-          <div class="gallery-ph">
-            <div class="gallery-ph-icon">🚐</div>
-            <div class="gallery-ph-label">Before / After 4</div>
-          </div>
-          <div class="gallery-overlay"><span>SUV Complete Detail</span></div>
+          <img src="photos/Hood_work_front.jpg" alt="Hood work front" loading="lazy">
         </div>
         <div class="gallery-item reveal reveal-d2">
-          <div class="gallery-ph">
-            <div class="gallery-ph-icon">💎</div>
-            <div class="gallery-ph-label">Before / After 5</div>
-          </div>
-          <div class="gallery-overlay"><span>Luxury Interior</span></div>
+          <img src="photos/Hood_work__side.jpg" alt="Hood work side" loading="lazy">
         </div>
         <div class="gallery-item reveal reveal-d3">
-          <div class="gallery-ph">
-            <div class="gallery-ph-icon">🏖️</div>
-            <div class="gallery-ph-label">Before / After 6</div>
-          </div>
-          <div class="gallery-overlay"><span>Beach Vehicle</span></div>
+          <img src="photos/Headlight_back.jpg" alt="Headlight detail" loading="lazy">
+        </div>
+        <div class="gallery-item reveal reveal-d4">
+          <img src="photos/Kneel_work.jpg" alt="Detail work close-up" loading="lazy">
         </div>
       </div>
-      <p class="gallery-note reveal">Real photos coming soon — check back after our first details!</p>
     </div>
   </section>
 
@@ -1072,6 +1136,52 @@
   </section>
 
   <!-- ============================================================
+       LEAVE A REVIEW
+  ============================================================ -->
+  <section id="leave-review">
+    <div class="container">
+      <div class="sec-header">
+        <h2 class="sec-title reveal">Leave Us a Review</h2>
+        <p class="sec-sub reveal reveal-d1">Had a great experience? We'd love to hear about it — and 5-star reviews appear in our ticker above!</p>
+      </div>
+      <div class="review-form-wrap reveal reveal-d2">
+        <div class="review-form-card">
+
+          <div class="review-success" id="reviewSuccess">
+            <div class="review-success-icon">⭐</div>
+            <h3>Thanks for the review!</h3>
+            <p id="reviewSuccessMsg">We really appreciate it.</p>
+          </div>
+
+          <form id="reviewForm" novalidate>
+            <div class="form-group">
+              <label>Your Rating</label>
+              <div class="star-picker" id="starPicker" role="group" aria-label="Star rating">
+                <span class="star-picker-star" data-val="1">★</span>
+                <span class="star-picker-star" data-val="2">★</span>
+                <span class="star-picker-star" data-val="3">★</span>
+                <span class="star-picker-star" data-val="4">★</span>
+                <span class="star-picker-star" data-val="5">★</span>
+              </div>
+              <div class="star-error" id="starError">Please select a star rating.</div>
+            </div>
+            <div class="form-group">
+              <label for="reviewName">Your Name</label>
+              <input type="text" id="reviewName" placeholder="e.g. Sarah M." required>
+            </div>
+            <div class="form-group">
+              <label for="reviewMessage">Your Review</label>
+              <textarea id="reviewMessage" placeholder="Tell us about your experience..." rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-navy form-submit">Submit Review</button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
        FOOTER
   ============================================================ -->
   <footer>
@@ -1133,6 +1243,47 @@
   ============================================================ -->
   <script>
     /* ----------------------------------------------------------
+       MARQUEE — build from API, only show 5-star reviews
+    ---------------------------------------------------------- */
+    function buildMarquee(reviews) {
+      const track   = document.getElementById('marqueeTrack');
+      const fiveStars = reviews.filter(r => r.rating === 5);
+      if (!fiveStars.length) return;
+
+      track.innerHTML = '';
+
+      fiveStars.forEach(r => {
+        const chip = document.createElement('div');
+        chip.className = 'review-chip';
+        chip.innerHTML =
+          `<span class="review-stars">★★★★★</span>` +
+          `<span class="review-text">"${r.message}"</span>` +
+          `<span class="review-name">— ${r.name}</span>`;
+        track.appendChild(chip);
+      });
+
+      // Duplicate for seamless loop
+      Array.from(track.children).forEach(chip =>
+        track.appendChild(chip.cloneNode(true))
+      );
+
+      // Measure the true pixel width of the original set
+      const halfWidth = Array.from(track.children)
+        .slice(0, fiveStars.length)
+        .reduce((w, el) => w + el.offsetWidth, 0);
+
+      // Animate by exact pixels so overflow:hidden doesn't throw off the %
+      track.style.setProperty('--marquee-end', `-${halfWidth}px`);
+      track.style.animationDuration = (halfWidth / 50) + 's';
+      track.classList.add('running');
+    }
+
+    fetch('/api/reviews')
+      .then(r => r.json())
+      .then(buildMarquee)
+      .catch(() => { /* server not running — marquee stays empty */ });
+
+    /* ----------------------------------------------------------
        NAV: transparent → solid on scroll past hero
     ---------------------------------------------------------- */
     const nav      = document.getElementById('nav');
@@ -1166,7 +1317,7 @@
     });
 
     /* ----------------------------------------------------------
-       SCROLL REVEAL (IntersectionObserver)
+       SCROLL REVEAL
     ---------------------------------------------------------- */
     const revealObs = new IntersectionObserver((entries) => {
       entries.forEach(e => {
@@ -1180,19 +1331,16 @@
     document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
     /* ----------------------------------------------------------
-       FORM SUBMISSION
+       BOOKING FORM
     ---------------------------------------------------------- */
     const bookForm    = document.getElementById('bookForm');
     const formSuccess = document.getElementById('formSuccess');
     const formFields  = document.getElementById('formFields');
 
-    /* Set minimum date to today */
     document.getElementById('date').min = new Date().toISOString().split('T')[0];
 
     bookForm.addEventListener('submit', (e) => {
       e.preventDefault();
-
-      /* Validate required fields */
       let firstInvalid = null;
       bookForm.querySelectorAll('[required]').forEach(field => {
         field.classList.remove('input-error');
@@ -1201,22 +1349,100 @@
           if (!firstInvalid) firstInvalid = field;
         }
       });
-
-      if (firstInvalid) {
-        firstInvalid.focus();
-        return;
-      }
-
-      /* Show success */
-      formFields.style.display  = 'none';
+      if (firstInvalid) { firstInvalid.focus(); return; }
+      formFields.style.display = 'none';
       formSuccess.classList.add('show');
       formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
 
-    /* Clear error state on input */
-    bookForm.querySelectorAll('input, select, textarea').forEach(f => {
-      f.addEventListener('input', () => f.classList.remove('input-error'));
+    bookForm.querySelectorAll('input, select, textarea').forEach(f =>
+      f.addEventListener('input', () => f.classList.remove('input-error'))
+    );
+
+    /* ----------------------------------------------------------
+       REVIEW FORM — star picker + submit
+    ---------------------------------------------------------- */
+    let selectedRating = 0;
+    const stars      = document.querySelectorAll('.star-picker-star');
+    const starError  = document.getElementById('starError');
+
+    function paintStars(upTo) {
+      stars.forEach(s => {
+        const val = +s.dataset.val;
+        s.classList.toggle('active', val <= upTo);
+      });
+    }
+
+    stars.forEach(star => {
+      star.addEventListener('mouseenter', () => {
+        paintStars(+star.dataset.val);
+        star.classList.add('hovered');
+      });
+      star.addEventListener('mouseleave', () => {
+        star.classList.remove('hovered');
+        paintStars(selectedRating);
+      });
+      star.addEventListener('click', () => {
+        selectedRating = +star.dataset.val;
+        paintStars(selectedRating);
+        starError.classList.remove('show');
+      });
     });
+
+    document.getElementById('reviewForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      let valid = true;
+
+      if (!selectedRating) {
+        starError.classList.add('show');
+        valid = false;
+      }
+
+      const nameEl    = document.getElementById('reviewName');
+      const messageEl = document.getElementById('reviewMessage');
+
+      [nameEl, messageEl].forEach(f => {
+        f.classList.remove('input-error');
+        if (!f.value.trim()) { f.classList.add('input-error'); valid = false; }
+      });
+
+      if (!valid) return;
+
+      try {
+        const res = await fetch('/api/reviews', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify({
+            name:    nameEl.value.trim(),
+            message: messageEl.value.trim(),
+            rating:  selectedRating,
+          }),
+        });
+
+        if (!res.ok) throw new Error('Server error');
+
+        // Show success, tailor message for 5-star
+        const successMsg = document.getElementById('reviewSuccessMsg');
+        successMsg.textContent = selectedRating === 5
+          ? 'Your 5-star review has been saved and will appear in the marquee above!'
+          : 'Your review has been saved. Thank you!';
+
+        document.getElementById('reviewForm').style.display    = 'none';
+        document.getElementById('reviewSuccess').classList.add('show');
+
+        // Reload marquee live if it was a 5-star
+        if (selectedRating === 5) {
+          fetch('/api/reviews').then(r => r.json()).then(buildMarquee);
+        }
+
+      } catch {
+        alert('Something went wrong saving your review. Please try again.');
+      }
+    });
+
+    document.querySelectorAll('#reviewForm input, #reviewForm textarea').forEach(f =>
+      f.addEventListener('input', () => f.classList.remove('input-error'))
+    );
   </script>
 
 </body>

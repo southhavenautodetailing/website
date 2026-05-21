@@ -1,0 +1,12 @@
+{
+  "name": "beach-reset-detailing",
+  "version": "1.0.0",
+  "description": "Beach Reset Detailing Co. — mobile auto detailing website",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

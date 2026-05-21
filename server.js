@@ -6,7 +6,7 @@ const http = require('http');
 const fs   = require('fs');
 const path = require('path');
 
-const PORT         = 3000;
+const PORT         = process.env.PORT || 3000;
 const REVIEWS_FILE = path.join(__dirname, 'reviews.json');
 const PUBLIC_DIR   = __dirname;
 

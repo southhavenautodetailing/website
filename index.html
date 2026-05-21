@@ -1153,7 +1153,9 @@
             <p id="reviewSuccessMsg">We really appreciate it.</p>
           </div>
 
-          <form id="reviewForm" novalidate>
+          <form id="reviewForm" name="customer-review" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+            <input type="hidden" name="form-name" value="customer-review">
+            <input type="hidden" name="bot-field" style="display:none">
             <div class="form-group">
               <label>Your Rating</label>
               <div class="star-picker" id="starPicker" role="group" aria-label="Star rating">
@@ -1278,10 +1280,10 @@
       track.classList.add('running');
     }
 
-    fetch('/api/reviews')
+    fetch('/reviews.json')
       .then(r => r.json())
       .then(buildMarquee)
-      .catch(() => { /* server not running — marquee stays empty */ });
+      .catch(() => {});
 
     /* ----------------------------------------------------------
        NAV: transparent → solid on scroll past hero
@@ -1409,34 +1411,26 @@
       if (!valid) return;
 
       try {
-        const res = await fetch('/api/reviews', {
-          method:  'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body:    JSON.stringify({
-            name:    nameEl.value.trim(),
-            message: messageEl.value.trim(),
-            rating:  selectedRating,
-          }),
+        const body = new URLSearchParams({
+          'form-name': 'customer-review',
+          name:    nameEl.value.trim(),
+          message: messageEl.value.trim(),
+          rating:  selectedRating,
         });
 
+        const res = await fetch('/', { method: 'POST', body });
         if (!res.ok) throw new Error('Server error');
 
-        // Show success, tailor message for 5-star
         const successMsg = document.getElementById('reviewSuccessMsg');
         successMsg.textContent = selectedRating === 5
-          ? 'Your 5-star review has been saved and will appear in the marquee above!'
-          : 'Your review has been saved. Thank you!';
+          ? "Your 5-star review has been submitted — we'll add it to the marquee soon!"
+          : 'Your review has been submitted. Thank you!';
 
-        document.getElementById('reviewForm').style.display    = 'none';
+        document.getElementById('reviewForm').style.display = 'none';
         document.getElementById('reviewSuccess').classList.add('show');
 
-        // Reload marquee live if it was a 5-star
-        if (selectedRating === 5) {
-          fetch('/api/reviews').then(r => r.json()).then(buildMarquee);
-        }
-
       } catch {
-        alert('Something went wrong saving your review. Please try again.');
+        alert('Something went wrong submitting your review. Please try again.');
       }
     });
 

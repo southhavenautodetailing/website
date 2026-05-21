@@ -1422,9 +1422,7 @@
         if (!res.ok) throw new Error('Server error');
 
         const successMsg = document.getElementById('reviewSuccessMsg');
-        successMsg.textContent = selectedRating === 5
-          ? "Your 5-star review has been submitted — we'll add it to the marquee soon!"
-          : 'Your review has been submitted. Thank you!';
+        successMsg.textContent = 'Your review has been submitted. Thanks for the feedback!';
 
         document.getElementById('reviewForm').style.display = 'none';
         document.getElementById('reviewSuccess').classList.add('show');
